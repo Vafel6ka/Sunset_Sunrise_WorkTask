@@ -10,8 +10,7 @@ Geocoder.init("AIzaSyDlr7H32pHtHlaeC67yv6uvnyDqMnTCYUs");
 
 
 const CityLocation = (props) => {
-    console.log(props, 'props')
-    
+    //console.log(props, 'props')
     
     Geocoder.from("Colosseum")
 		.then(json => {

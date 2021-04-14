@@ -5,7 +5,7 @@ import Colors from "../styleConstant/Colors";
 const Header = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}> This is Header! </Text>
+      <Text style={styles.title}> Sunset & Sunrise </Text>
     </View>
   );
 };
