@@ -8,7 +8,7 @@ export default function Main() {
   return (
     <View style={styles.container}>
       <CurrentLocation />
-      {/* <CityLocation /> */}
+      <CityLocation />
     </View>
   );
 }

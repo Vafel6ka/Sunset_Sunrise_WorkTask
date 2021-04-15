@@ -1,8 +1,8 @@
-import { GET_CITY_DATA } from "../constants/actions_type"
+import { GET_CITY_LOC_DATA } from "../constants/actions_type"
 
 const getCityLocData = (data) =>{
     return {
-        type: GET_CITY_DATA,
+        type: GET_CITY_LOC_DATA,
         payload: data
     }
 }

@@ -2,8 +2,8 @@ import { GET_CITY_LOC_DATA } from "../constants/actions_type"
 
 const initialState = {
     dataCity:{
-        latitude:10,
-        longitude: 100
+        sunrise:"QQQQ",
+        sunset:"DDDD"
     }
 }
 
