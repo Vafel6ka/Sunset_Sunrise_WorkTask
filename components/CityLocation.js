@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, TextInput, StyleSheet, Button} from "react-native";
 import Colors from "../styleConstant/Colors";
 import { connect } from "react-redux";
-import getDataCity from "../store/actions/getDataCity";
+import getCityLocData from "../store/actions/getCityLocData";
 import Geocoder from "react-native-geocoding";
 
 Geocoder.init("AIzaSyDlr7H32pHtHlaeC67yv6uvnyDqMnTCYUs");
@@ -58,7 +58,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch)=> {
     return {
-        getDataCityFn: (data) => dispatch(getDataCity(data))
+        getDataCityFn: (data) => dispatch(getCityLocData(data))
     }
 }
 

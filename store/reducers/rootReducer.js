@@ -1,10 +1,10 @@
 import {combineReducers} from "redux";
-import resultReduser from "../reducers/resultReduser"
-import cityReducer from "../reducers/cityReducer"
+import currentLocReduser from "../reducers/currentLocReduser"
+import cityLocReducer from "../reducers/cityLocReducer"
 
 const rootReducer = combineReducers({
-    data: resultReduser,
-    dataCity: cityReducer
+    data: currentLocReduser,
+    dataCity: cityLocReducer
 })
 
 export default rootReducer;

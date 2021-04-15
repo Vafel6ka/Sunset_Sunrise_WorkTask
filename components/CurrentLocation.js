@@ -1,36 +1,24 @@
 import React, { useEffect } from "react";
-import { View, Text, StyleSheet, Button} from "react-native";
+import { View, Text, StyleSheet} from "react-native";
 import Colors from "../styleConstant/Colors";
 import Geolocation from "@react-native-community/geolocation";
-import {connect} from 'react-redux';
-import getData from '../store/actions/getData';
+import { connect } from 'react-redux';
+import getCurrentLocData from '../store/actions/getCurrentLocData';
 
 const Main = (props) => {
-//console.log(props, 'props')
-  const  getSunriseSunset = (latitude, longitude) => {
-    const axios = require("axios");
-    axios
-      .get(
-        `https://api.sunrise-sunset.org/json?lat=${latitude}&lng=${longitude}&date=today
-      `
-      )
-      .then(function (response) {
-        props.getDataFn(response.data.results) //ACTION!    
-      })
-      .catch(function (error) {
-        // handle error
-      });
+
+  const getSunriseSunset = (latitude, longitude) => {
+    let SunCalc = require('suncalc');  
+    let times = SunCalc.getTimes(new Date(), latitude, longitude);
+    props.getCurrentLocDataFn(times);
   }
   
-  function geoFindMe() {
+  const geoFindMe = () => {
     function success(pos) {
       let crd = pos.coords;
-      let latitude = crd.latitude;
-      let longitude = crd.longitude;
-      console.log(`latitude:${latitude}`);
-      console.log(`longitude:${longitude}`);
-      getSunriseSunset(latitude, longitude);
-      }
+
+      getSunriseSunset(crd.latitude, crd.longitude);
+    }
 
     function error(err) {
       console.warn(`ERROR(${err.code}): ${err.message}`);
@@ -42,27 +30,25 @@ const Main = (props) => {
     }
   }
 
-  useEffect(() => {
-    geoFindMe()
-  }, [])
+useEffect(() => {
+  geoFindMe()
+}, [])
   
   return (
     <View style={styles.container}>
-      <Text> Sunset : {props.data.data.sunset}</Text>
-      <Text> Sunrise : {props.data.data.sunrise}</Text>
+      <Text> Sunset : {props.data.data.sunset.toString().slice(15,25)}</Text>
+      <Text> Sunrise : {props.data.data.sunrise.toString().slice(15,25)}</Text>
     </View>
   );
 };
 
 const mapStateToProps = (state) => ({
-  all:state,
-  data: state.data,
-  dataCity: state.dataCity
+  data: state.data
 })
 
 const mapDispatchToProps = (dispatch)=> {
     return {
-      getDataFn: (data) => dispatch(getData(data))
+      getCurrentLocDataFn: (data) => dispatch(getCurrentLocData(data))
     }
 }
 
@@ -76,3 +62,9 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.primaryMainBackGround,
   },
 });
+
+
+     // .get(
+      //   `https://api.sunrise-sunset.org/json?lat=${latitude}&lng=${longitude}&date=today
+      // `
+      // )
