@@ -1,5 +1,6 @@
 export default {
     primaryHeadBackGround: "#54C571",
-    primaryMainBackGround: "#99C68E",
+    primaryMainBackGround: "#033500",
     primaryFooterBackGround: "#54C571",
+    primaryMainTextColor: "#efeff8"
   };

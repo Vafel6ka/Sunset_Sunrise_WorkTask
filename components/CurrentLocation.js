@@ -16,6 +16,8 @@ const Main = (props) => {
   const geoFindMe = () => {
     function success(pos) {
       let crd = pos.coords;
+      console.log(crd.latitude);
+      console.log(crd.longitude);
 
       getSunriseSunset(crd.latitude, crd.longitude);
     }
@@ -24,7 +26,7 @@ const Main = (props) => {
       console.warn(`ERROR(${err.code}): ${err.message}`);
     }
     if (Geolocation) {
-        Geolocation.getCurrentPosition(success, error);
+        Geolocation.getCurrentPosition(success, error, {timeout:20000, enableHighAccuracy: true});
     } else { 
         console.log("Geolocation is not supported by this browser.");
     }
@@ -59,7 +61,7 @@ const styles = StyleSheet.create({
     width: "100%",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: Colors.primaryMainBackGround,
+    backgroundColor: Colors.primaryMainBackGround,  
   },
 });
 

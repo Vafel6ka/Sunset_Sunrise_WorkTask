@@ -10,26 +10,28 @@ Geocoder.init('AIzaSyCPvj8dihamNluV64OEiVNQlmmXrbDwvhA');
 
 const CityLocation = (props) => {
     
-    const Colosseum = () => {
-      Geocoder.from(props.dataCitiesName.dataCitiesName.toString())
+    const getLocation = () => {
+      let cityName = props.dataCitiesName.dataCitiesName.toString()
+      if (cityName == "[object Object]") {return} else {
+      Geocoder.from(cityName)
       .then(json => {
         var location = json.results[0].geometry.location;
         console.log(location);
         getCitySunriseSunset(location.lat, location.lng)
-        console.log(props.all)
       })
-      .catch(error => console.warn(error));
+      .catch(error => console.warn(error,'ERRRRRROOORRR'));
   }
+}
 
   const getCitySunriseSunset = (cityLatitude, cityLongitude) => {
     let SunCalc = require('suncalc');  
     let times = SunCalc.getTimes(new Date(), cityLatitude, cityLongitude);
     props.getCityLocDataFn(times);
-    return console.log(times)
+    console.log(props.all)
   }
 
   useEffect(() => {
-    Colosseum()
+    getLocation()
   }, [])
 
     return (
@@ -37,11 +39,20 @@ const CityLocation = (props) => {
             <Text> CitySunset : {props.dataCity.dataCity.sunset.toString().slice(15,25)} </Text>
             <Text> CitySunrise : {props.dataCity.dataCity.sunrise.toString().slice(15,25)} </Text>
 
-            <Text> City name: {props.dataCitiesName.dataCitiesName.toString()}</Text> 
+            <Text> 
+                City name: {props.dataCitiesName.dataCitiesName}
+            </Text> 
             
-            <Text style={styles.title}>Input the name of city</Text>
-            <TextInput style={styles.inputCityName} defaultValue="" onChangeText={(cityName)=>props.getCityNameDataFn(cityName)}/> 
-            <Button title="Get data city" onPress={Colosseum} />
+            <TextInput 
+                style={styles.inputCityName} 
+                defaultValue="Ukraine, " 
+                onChangeText={(cityName)=>props.getCityNameDataFn(cityName)}/> 
+
+            <Text style={styles.title}>
+                Input the name of city
+            </Text>
+
+            <Button title="Get data city" onPress={getLocation} />
         </View>
     )
 }
@@ -73,10 +84,14 @@ const styles = StyleSheet.create({
       fontWeight: "bold",
     },
     inputCityName :{
-        width:70,
+        width:240,
+        height:30,
         margin:20,
         backgroundColor:"lightgrey",
-        borderRadius:5
+        borderRadius:5,
+    },
+    innerText: {
+      color: Colors.primaryMainTextColor
     }
   });
   

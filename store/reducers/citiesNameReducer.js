@@ -1,9 +1,7 @@
 import { GET_CITY_NAME_DATA } from "../constants//actions_type"
 
 const initialState = {
-    dataCitiesName: {
-        dataCitiesName:"Torronto"
-        }
+    dataCitiesName:"Kyiv"
 }
 
 const citiesNameReducer = (state = initialState, action) => {
