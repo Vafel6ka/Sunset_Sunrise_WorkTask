@@ -6,27 +6,19 @@ import getCityNameData from "../store/actions/getCityNameData";
 import getCityLocData from "../store/actions/getCityLocData";
 import Geocoder from "react-native-geocoding";
 
-// Geocoder.init("AIzaSyDlr7H32pHtHlaeC67yv6uvnyDqMnTCYUs");
-//AIzaSyDlr7H32pHtHlaeC67yv6uvnyDqMnTCYUs
-
+Geocoder.init('AIzaSyCPvj8dihamNluV64OEiVNQlmmXrbDwvhA');
 
 const CityLocation = (props) => {
-    //console.log(props, 'props')
     
     const Colosseum = () => {
-    Geocoder.from("Colosseum")
-		.then(json => {
-			var location = json.results[0].geometry.location;
-			console.log(location);
-		})
-		.catch(error => console.warn(error));
-  }
-
-    const findCity = () =>{
-      const cityLatitude = 10;
-      const cityLongitude = 100;
-      getCitySunriseSunset(cityLatitude, cityLongitude)
-      console.log(props.all)
+      Geocoder.from(props.dataCitiesName.dataCitiesName.toString())
+      .then(json => {
+        var location = json.results[0].geometry.location;
+        console.log(location);
+        getCitySunriseSunset(location.lat, location.lng)
+        console.log(props.all)
+      })
+      .catch(error => console.warn(error));
   }
 
   const getCitySunriseSunset = (cityLatitude, cityLongitude) => {
@@ -37,7 +29,7 @@ const CityLocation = (props) => {
   }
 
   useEffect(() => {
-    findCity()
+    Colosseum()
   }, [])
 
     return (
@@ -49,7 +41,7 @@ const CityLocation = (props) => {
             
             <Text style={styles.title}>Input the name of city</Text>
             <TextInput style={styles.inputCityName} defaultValue="" onChangeText={(cityName)=>props.getCityNameDataFn(cityName)}/> 
-            <Button title="Get data city" onPress={findCity} />
+            <Button title="Get data city" onPress={Colosseum} />
         </View>
     )
 }
