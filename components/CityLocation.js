@@ -1,15 +1,16 @@
 import React, { useEffect } from "react";
-import { View, Text, TextInput, StyleSheet, Button} from "react-native";
+import { View, Text, TextInput, StyleSheet, Button, TouchableOpacity} from "react-native";
 import Colors from "../styleConstant/Colors";
 import { connect } from "react-redux";
 import getCityNameData from "../store/actions/getCityNameData";
 import getCityLocData from "../store/actions/getCityLocData";
 import Geocoder from "react-native-geocoding";
+import InnerText from "../styleConstant/InnerTextStyle";
+import TitleText from "../styleConstant/TitleTextStyle"
 
 Geocoder.init('AIzaSyCPvj8dihamNluV64OEiVNQlmmXrbDwvhA');
 
 const CityLocation = (props) => {
-    
     const getLocation = () => {
       let cityName = props.dataCitiesName.dataCitiesName.toString()
       if (cityName == "[object Object]") {return} else {
@@ -36,23 +37,32 @@ const CityLocation = (props) => {
 
     return (
         <View style={styles.container}>
-            <Text> CitySunset : {props.dataCity.dataCity.sunset.toString().slice(15,25)} </Text>
-            <Text> CitySunrise : {props.dataCity.dataCity.sunrise.toString().slice(15,25)} </Text>
-
-            <Text> 
-                City name: {props.dataCitiesName.dataCitiesName}
-            </Text> 
+          <View style={styles.content}>   
             
+            <TitleText> Selected city location data:</TitleText>  
+    
+              <InnerText> 
+                Sunset : {props.dataCity.dataCity.sunset.toString().slice(15,25)} 
+              </InnerText>
+              <InnerText> 
+                Sunrise : {props.dataCity.dataCity.sunrise.toString().slice(15,25)} 
+              </InnerText>
+              <InnerText> 
+                Selected city: {props.dataCitiesName.dataCitiesName}
+              </InnerText> 
+
             <TextInput 
                 style={styles.inputCityName} 
-                defaultValue="Ukraine, " 
+                defaultValue="New York" 
                 onChangeText={(cityName)=>props.getCityNameDataFn(cityName)}/> 
 
-            <Text style={styles.title}>
+            <Text style={styles.citytitle}>
                 Input the name of city
             </Text>
-
-            <Button title="Get data city" onPress={getLocation} />
+            <TouchableOpacity style={styles.btn} onPress={getLocation}>
+                <Text style={styles.textBtn}>Get data</Text>
+            </TouchableOpacity>
+          </View>
         </View>
     )
 }
@@ -78,8 +88,13 @@ const styles = StyleSheet.create({
       justifyContent: "center",
       backgroundColor: Colors.primaryMainBackGround,
       width: "100%",
+      flex:0.6
     },
-    title: {
+    content: {
+      justifyContent: 'center', 
+      alignItems: 'center',  
+    },
+    citytitle: {
       fontSize: 12,
       fontWeight: "bold",
     },
@@ -87,11 +102,31 @@ const styles = StyleSheet.create({
         width:240,
         height:30,
         margin:20,
-        backgroundColor:"lightgrey",
+        backgroundColor:Colors.primaryMainBackGround,
         borderRadius:5,
+        textAlign:"center",
+        borderBottomWidth:0.5,
+        borderBottomColor:"grey",
+        fontSize:20
     },
-    innerText: {
-      color: Colors.primaryMainTextColor
+    btn: {
+      width: 200,
+      marginTop: 20,
+      backgroundColor: Colors.primaryBtnBgColor,
+      padding: 15,
+      borderRadius: 10,
+      alignItems:"center",
+      shadowColor: "#000",
+      shadowOffset: {
+        width: 0,
+        height: 2,
+      },
+      shadowOpacity: 0.25,
+      shadowRadius: 3.84,
+      elevation: 5,
+    },
+    textBtn: {
+      fontSize: 19
     }
   });
   

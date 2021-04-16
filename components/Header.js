@@ -14,14 +14,23 @@ export default Header;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 0.1,
+    flex: 0.2,
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: Colors.primaryHeadBackGround,
     width: "100%",
+    borderBottomWidth:2,
   },
   title: {
-    fontSize: 24,
-    fontWeight: "bold",
+    fontSize: 32,
+    fontWeight: "bold"
   },
 });
+
+
+// to choose font to all child elements
+// const MyTextCustomFont = (props) => {
+//   return (
+//        <Text style={{fontFamily:'myFont'}} {...props} >{props.children}</Text>
+//   )
+// }

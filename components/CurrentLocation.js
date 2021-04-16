@@ -4,6 +4,8 @@ import Colors from "../styleConstant/Colors";
 import Geolocation from "@react-native-community/geolocation";
 import { connect } from 'react-redux';
 import getCurrentLocData from '../store/actions/getCurrentLocData';
+import InnerText from "../styleConstant/InnerTextStyle";
+import TitleText from "../styleConstant/TitleTextStyle"
 
 const Main = (props) => {
 
@@ -16,8 +18,6 @@ const Main = (props) => {
   const geoFindMe = () => {
     function success(pos) {
       let crd = pos.coords;
-      console.log(crd.latitude);
-      console.log(crd.longitude);
 
       getSunriseSunset(crd.latitude, crd.longitude);
     }
@@ -26,11 +26,13 @@ const Main = (props) => {
       console.warn(`ERROR(${err.code}): ${err.message}`);
     }
     if (Geolocation) {
-        Geolocation.getCurrentPosition(success, error, {timeout:20000, enableHighAccuracy: true});
+        Geolocation.getCurrentPosition(success, error);
     } else { 
         console.log("Geolocation is not supported by this browser.");
     }
   }
+
+  Geolocation.getCurrentPosition(info => console.log(info));//Another mathod to get current location
 
 useEffect(() => {
   geoFindMe()
@@ -38,8 +40,15 @@ useEffect(() => {
   
   return (
     <View style={styles.container}>
-      <Text> Sunset : {props.data.data.sunset.toString().slice(15,25)}</Text>
-      <Text> Sunrise : {props.data.data.sunrise.toString().slice(15,25)}</Text>
+      <View style={styles.content}>
+        <TitleText> Current location data:</TitleText>
+        <InnerText> 
+          Sunset : {props.data.data.sunset.toString().slice(15,25)}
+        </InnerText>
+        <InnerText> 
+          Sunrise : {props.data.data.sunrise.toString().slice(15,25)}
+        </InnerText>
+      </View>
     </View>
   );
 };
@@ -58,10 +67,16 @@ export default connect(mapStateToProps, mapDispatchToProps)(Main);
 
 const styles = StyleSheet.create({
   container: {
-    width: "100%",
+    width: "90%",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: Colors.primaryMainBackGround,  
+    backgroundColor: Colors.primaryMainBackGround, 
+    borderBottomWidth:1,
+    flex:0.4
+  },
+  content: {
+    justifyContent: 'center', 
+    alignItems: 'center',  
   },
 });
 

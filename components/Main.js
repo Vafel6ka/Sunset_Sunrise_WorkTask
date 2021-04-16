@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
       flex: 0.8,
       width: "100%",
       alignItems: "center",
-      justifyContent: "space-around",
+      justifyContent: "center",
       backgroundColor: Colors.primaryMainBackGround,
     },
   });

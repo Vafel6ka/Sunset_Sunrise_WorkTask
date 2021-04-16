@@ -9,7 +9,6 @@ export default function App() {
     <View style={styles.container}>
       <Header />
       <Main />
-      <Footer />
     </View>
   );
 }
