@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { View, Text, StyleSheet} from "react-native";
+import { View, StyleSheet} from "react-native";
 import Colors from "../styleConstant/Colors";
 import Geolocation from "@react-native-community/geolocation";
 import { connect } from 'react-redux';
@@ -79,9 +79,3 @@ const styles = StyleSheet.create({
     alignItems: 'center',  
   },
 });
-
-
-     // .get(
-      //   `https://api.sunrise-sunset.org/json?lat=${latitude}&lng=${longitude}&date=today
-      // `
-      // )

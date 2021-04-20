@@ -3,6 +3,7 @@ import { View, Text, StyleSheet } from "react-native";
 import Colors from "../styleConstant/Colors";
 
 const Header = () => {
+  
   return (
     <View style={styles.container}>
       <Text style={styles.title}> Sunset & Sunrise </Text>
@@ -26,11 +27,3 @@ const styles = StyleSheet.create({
     fontWeight: "bold"
   },
 });
-
-
-// to choose font to all child elements
-// const MyTextCustomFont = (props) => {
-//   return (
-//        <Text style={{fontFamily:'myFont'}} {...props} >{props.children}</Text>
-//   )
-// }

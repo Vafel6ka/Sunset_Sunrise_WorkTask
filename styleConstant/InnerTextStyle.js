@@ -4,7 +4,7 @@ import { StyleSheet } from "react-native"
 
 const InnerText = (props) => {
     return (
-        <Text style={styled.textStyle}>
+        <Text style={{ ...styled.textStyle, ...props.style }}>
             {props.children}
         </Text>
     )

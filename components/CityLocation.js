@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { View, Text, TextInput, StyleSheet, Button, TouchableOpacity} from "react-native";
+import { View, Text, TextInput, StyleSheet, Alert, TouchableOpacity} from "react-native";
 import Colors from "../styleConstant/Colors";
 import { connect } from "react-redux";
 import getCityNameData from "../store/actions/getCityNameData";
@@ -37,10 +37,8 @@ const CityLocation = (props) => {
 
     return (
         <View style={styles.container}>
-          <View style={styles.content}>   
-            
-            <TitleText> Selected city location data:</TitleText>  
-    
+          <View style={styles.content}>             
+            <TitleText> Selected city location data:</TitleText>   
               <InnerText> 
                 Sunset : {props.dataCity.dataCity.sunset.toString().slice(15,25)} 
               </InnerText>
@@ -50,12 +48,12 @@ const CityLocation = (props) => {
               <InnerText> 
                 Selected city: {props.dataCitiesName.dataCitiesName}
               </InnerText> 
-
             <TextInput 
-                style={styles.inputCityName} 
-                defaultValue="New York" 
-                onChangeText={(cityName)=>props.getCityNameDataFn(cityName)}/> 
-
+                style={styles.inputCityName}
+                textContentType="addressCity"
+                defaultValue="Kyiv" 
+                onChangeText={(cityName)=> {
+                props.getCityNameDataFn(cityName)}}/> 
             <Text style={styles.citytitle}>
                 Input the name of city
             </Text>
